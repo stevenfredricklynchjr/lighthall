@@ -1,7 +1,7 @@
 type ClickCount
   @model
   @key(
-    name: "clickDB"
+    name: "clickTable"
     fields: ["clickDB"]
     queryField: "clickCount"
   )
