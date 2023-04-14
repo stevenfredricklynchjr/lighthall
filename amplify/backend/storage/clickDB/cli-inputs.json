@@ -1,0 +1,10 @@
+{
+  "resourceName": "clickDB",
+  "tableName": "clickTable",
+  "partitionKey": {
+    "fieldName": "-",
+    "fieldType": "number"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

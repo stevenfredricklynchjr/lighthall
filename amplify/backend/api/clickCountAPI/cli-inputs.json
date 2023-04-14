@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "apiName": "clickCountAPI",
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 7,
+      "apiKeyExpirationDate": "2023-04-21T10:06:44.686Z",
+      "keyDescription": "manage the number of clicks"
+    }
+  }
+}
