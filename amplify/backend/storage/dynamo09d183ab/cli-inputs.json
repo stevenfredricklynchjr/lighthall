@@ -1,0 +1,10 @@
+{
+  "resourceName": "dynamo09d183ab",
+  "tableName": "clickTable",
+  "partitionKey": {
+    "fieldName": "clickCount",
+    "fieldType": "number"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

@@ -24,6 +24,10 @@
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
     },
+    "dynamo09d183ab": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
     "dynamo11ecdab5": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"

@@ -1,0 +1,27 @@
+type ClickCount
+  @model
+  @key(
+    name: "clickTable"
+    fields: ["clickDB"]
+    queryField: "clickCount"
+  )
+  @auth(rules: [
+    { allow: owner }
+  ])
+{
+  clickDB: ID!
+  count: Int!
+}
+
+type Query {
+  clickCount: ClickCount @aws_iam
+}
+
+type Mutation {
+  incrementClickCount(count: Int!): ClickCount @aws_iam
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+}

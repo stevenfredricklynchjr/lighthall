@@ -2,8 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import {Amplify, API} from 'aws-amplify'
 import reportWebVitals from './reportWebVitals';
+import awsexports from './aws-exports';
 
+Amplify.configure(awsexports)
+API.configure(awsexports)
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

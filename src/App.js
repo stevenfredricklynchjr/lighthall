@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { API } from 'aws-amplify';
-
+import { API , Amplify} from 'aws-amplify';
+import awsexports from './aws-exports';
+Amplify.configure(awsconfig);
+API.configure(awsexports);
 
 function App() {
   const [clickCount, setClickCount] = useState(0);
@@ -15,7 +17,7 @@ function App() {
   }
 
   const handleClick = async () => {
-    await API.post('clickCountAPI', '/incrementClickCount', {
+    await API.post('clickCountAPI', '/clickCount', {
       body: { count: clickCount + 1 }
     });
     setClickCount(clickCount + 1);

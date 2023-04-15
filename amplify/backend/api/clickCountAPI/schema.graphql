@@ -1,27 +1,218 @@
-type ClickCount
-  @model
-  @key(
-    name: "clickDB"
-    fields: ["clickDB"]
-    queryField: "clickCount"
-  )
-  @auth(rules: [
-    { allow: owner }
-  ])
-{
-  clickDB: ID!
+
+type ClickCount {
+  id: ID!
   count: Int!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
 }
 
 type Query {
-  clickCount: ClickCount @aws_iam
+  clickCount: ClickCount!
+  getClickCount(id: ID!): ClickCount
+  listClickCounts(filter: ModelClickCountFilterInput, limit: Int, nextToken: String): ModelClickCountConnection
 }
 
 type Mutation {
-  incrementClickCount(count: Int!): ClickCount @aws_iam
+  incrementClickCount(count: Int!): ClickCount!
+  createClickCount(input: CreateClickCountInput!, condition: ModelClickCountConditionInput): ClickCount
+  updateClickCount(input: UpdateClickCountInput!, condition: ModelClickCountConditionInput): ClickCount
+  deleteClickCount(input: DeleteClickCountInput!, condition: ModelClickCountConditionInput): ClickCount
 }
 
-schema {
-  query: Query
-  mutation: Mutation
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
 }
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelClickCountConnection {
+  items: [ClickCount]!
+  nextToken: String
+}
+
+input ModelClickCountFilterInput {
+  id: ModelIDInput
+  count: ModelIntInput
+  and: [ModelClickCountFilterInput]
+  or: [ModelClickCountFilterInput]
+  not: ModelClickCountFilterInput
+}
+
+input ModelClickCountConditionInput {
+  count: ModelIntInput
+  and: [ModelClickCountConditionInput]
+  or: [ModelClickCountConditionInput]
+  not: ModelClickCountConditionInput
+}
+
+input CreateClickCountInput {
+  id: ID
+  count: Int!
+}
+
+input UpdateClickCountInput {
+  id: ID!
+  count: Int
+}
+
+input DeleteClickCountInput {
+  id: ID!
+}
+
+input ModelSubscriptionClickCountFilterInput {
+  id: ModelSubscriptionIDInput
+  count: ModelSubscriptionIntInput
+  and: [ModelSubscriptionClickCountFilterInput]
+  or: [ModelSubscriptionClickCountFilterInput]
+}
+
+type Subscription {
+  onCreateClickCount(filter: ModelSubscriptionClickCountFilterInput): ClickCount @aws_subscribe(mutations: ["createClickCount"])
+  onUpdateClickCount(filter: ModelSubscriptionClickCountFilterInput): ClickCount @aws_subscribe(mutations: ["updateClickCount"])
+  onDeleteClickCount(filter: ModelSubscriptionClickCountFilterInput): ClickCount @aws_subscribe(mutations: ["deleteClickCount"])
+}
+
