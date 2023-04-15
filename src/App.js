@@ -15,7 +15,7 @@ function App() {
   }
 
   const handleClick = async () => {
-    await API.post('clickCountAPI', '/clickCount', {
+    await API.post('clickCountAPI', '/incrementClickCount', {
       body: { count: clickCount + 1 }
     });
     setClickCount(clickCount + 1);

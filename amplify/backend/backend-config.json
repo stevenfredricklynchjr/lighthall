@@ -23,6 +23,10 @@
     "clickDB": {
       "providerPlugin": "awscloudformation",
       "service": "DynamoDB"
+    },
+    "dynamo11ecdab5": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
     }
   }
 }

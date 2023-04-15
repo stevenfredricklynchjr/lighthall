@@ -1,0 +1,22 @@
+{
+  "resourceName": "dynamo11ecdab5",
+  "tableName": "clickTable",
+  "partitionKey": {
+    "fieldName": "count",
+    "fieldType": "number"
+  },
+  "sortKey": {
+    "fieldName": "geography",
+    "fieldType": "string"
+  },
+  "gsi": [
+    {
+      "name": "CountIndex",
+      "partitionKey": {
+        "fieldName": "count",
+        "fieldType": "number"
+      }
+    }
+  ],
+  "triggerFunctions": []
+}
